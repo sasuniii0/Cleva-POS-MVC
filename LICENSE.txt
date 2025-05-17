@@ -1,0 +1,9 @@
+Copyright © 2025 Sasuni Wijerathne
+
+This codebase is proprietary and not open-source. No part of this project may be
+copied, modified, published, or distributed in any form without prior written
+permission from the author.
+
+For permissions, contact:
+Sasuni Wijerathne
+GitHub: https://github.com/sasuniii0

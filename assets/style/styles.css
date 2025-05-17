@@ -1,0 +1,466 @@
+/*dashboard styles*/
+
+:root {
+    --primary-color: #0c38bf;
+    --secondary-color: #1cc88a;
+    --accent-color: #f6c23e;
+    --danger-color: #e74a3b;
+    --light-bg: #f8f9fc;
+}
+
+body {
+    background-color: #f5f7fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.nav-link {
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1.5rem 0 rgba(58, 59, 69, 0.2);
+}
+
+.metric-card {
+    border-left: 0.25rem solid;
+    height: 100%;
+}
+
+.metric-card.bg-primary {
+    border-left-color: var(--primary-color);
+}
+
+.metric-card.bg-success {
+    border-left-color: var(--secondary-color);
+}
+
+.metric-card.bg-warning {
+    border-left-color: var(--accent-color);
+}
+
+.metric-card.bg-danger {
+    border-left-color: var(--danger-color);
+}
+
+.metric-card .card-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+#salesChart {
+    width: 100% !important;
+    height: 200px !important;
+}
+
+.alert-card {
+    border-left: 0.25rem solid var(--accent-color);
+}
+
+.alert-card .card-header {
+    background-color: rgba(246, 194, 62, 0.1);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+}
+
+.list-group-item {
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    border-left-color: var(--danger-color);
+    transform: translateX(5px);
+}
+
+.current-date {
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 0.5rem 0 rgba(58, 59, 69, 0.1);
+    display: inline-block;
+    margin: 1rem 0;
+}
+
+/*customer styles*/
+
+#sec {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    padding: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#title {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid ;
+}
+
+.form-floating > .form-control {
+    border-left: 3px solid ;
+}
+
+.form-floating > .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+.btn-success {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-info {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+.input-group .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+#customerForm {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.action-buttons .btn {
+    margin-right: 0.5rem;
+    min-width: 100px;
+}
+
+
+/*item styles*/
+#item-sec {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    padding: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+
+#titleitem {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid ;
+}
+
+.form-floating > .form-control {
+    border-left: 3px solid var(--primary-color);
+}
+
+.form-floating > .form-control:focus {
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+.btn-success {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-info {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(78, 115, 223, 0.05);
+    transform: scale(1.01);
+    transition: all 0.2s ease;
+}
+
+
+
+#itemForm {
+    background-color: var(--light-bg);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.action-buttons .btn {
+    margin-right: 0.5rem;
+    min-width: 100px;
+}
+
+#imagePreview {
+    width: 100px;
+    height: 100px;
+    border: 1px dashed #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#imagePreview img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.product-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/*orders styles*/
+
+#fullPg {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+#sidePg {
+    flex: 2;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    padding: 1.5rem;
+}
+
+#rightSidePg {
+    flex: 1;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    padding: 1.5rem;
+}
+
+#item_tbody{
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#titleorder {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid;
+}
+
+#cart {
+    background-color: var(--light-bg);
+    border-radius: 0.5rem;
+}
+
+.product-card {
+    transition: all 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    height: 100%;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1.5rem 0 rgba(58, 59, 69, 0.2);
+}
+
+.product-img {
+    height: 150px;
+    object-fit: contain;
+    padding: 1rem;
+}
+
+.cart-item {
+    border-left: 3px solid ;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.cart-item:hover {
+    transform: translateX(5px);
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.quantity-control button {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.quantity-display {
+    min-width: 30px;
+    text-align: center;
+}
+
+#continue {
+    width: 100%;
+    padding: 0.5rem;
+    font-weight: 500;
+}
+
+.total-display {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    font-weight: 600;
+}
+
+@media (max-width: 992px) {
+    #fullPg {
+        flex-direction: column;
+    }
+}
+
+
+/*setting styles*/
+
+body{
+    background: #dcdcdc;
+}
+.settings-card {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.settings-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.settings-icon {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    color: #4e73df;
+}
+.nav-pills .nav-link.active {
+    background-color: #4e73df;
+}
+.nav-pills .nav-link {
+    color: #5a5c69;
+}
+
+
+/*invoice styles*/
+
+.row{
+    padding: 15px;
+}
+
+.card {
+    border: none;
+    border-radius: 0.35rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.card-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.invoice-card {
+    transition: all 0.3s ease;
+}
+
+.invoice-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 1.5rem 0 rgba(58, 59, 69, 0.2);
+}
+
+.invoice-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.status-paid {
+    background-color: #1cc88a;
+    color: white;
+}
+
+.status-pending {
+    background-color: #f6c23e;
+    color: #000;
+}
+
+.status-cancelled {
+    background-color: #e74a3b;
+    color: white;
+}
+
+.invoice-table th {
+    border-top: none;
+    font-weight: 600;
+    color: #5a5c69;
+}
+
+.invoice-total {
+    background-color: #f8f9fc;
+    font-weight: bold;
+}
+
+.print-btn {
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.print-btn:hover {
+    background-color: #2e59d9;
+}
+#padding{
+    padding: 20px;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    .invoice-print, .invoice-print * {
+        visibility: visible;
+    }
+    .invoice-print {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+    .no-print {
+        display: none !important;
+    }
+}
