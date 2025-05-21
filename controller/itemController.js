@@ -1,8 +1,29 @@
 import ItemModel from "../model/itemModel.js";
 import { item_db} from "../db/db.js";
+import {syncAvailableItems} from "./ordersController.js";
 
 let selectedItemIndex = null;
 let currentImageFile = null;
+
+export function loadItemsOnTable() {
+
+    $('#item_tbody').empty();
+
+    item_db.map((item, index) => {
+        let name = item.description;
+        let price = item.unitPrice;
+        let qoh = item.quantity;
+
+        let data = `<tr>
+                      <td>${'I' + String(index + 1).padStart(3, '0')}</td>
+                      <td>${name}</td>
+                      <td>${price}</td>
+                      <td>${qoh}</td>
+                  </tr>`
+
+        $('#item_tbody').append(data);
+    });
+}
 
 // Image preview functionality
 document.getElementById('formFileMultiple').addEventListener('change', function(e) {
@@ -28,21 +49,20 @@ document.getElementById('formFileMultiple').addEventListener('change', function(
 //load item records
 function loadItems(){
     $('#table-body').empty();
-    item_db.map((item, index) => {
-        let desc = item.description;
-        let price = item.unitPrice;
-        let quantity = item.quantity;
-        let pic = item.picture;
-
-        let data = `<tr>
-                            <td>${index +1 }</td>
-                            <td>${desc}</td>
-                            <td>${price}</td>
-                            <td>${quantity}</td>
-                            <td>${pic ? `<img src = "${pic}" class = "img-thumbnail" width = "50">` : 'No Image'}</td>
-        </tr>`
-        $('#table-body').append(data);
-    })
+    item_db.forEach((item, index) => {
+        const rowId = `item-row-${index}`;
+        const row = `
+            <tr id="${rowId}" class="item-row">
+                <td>${index + 1}</td>
+                <td>${item.description || 'N/A'}</td>
+                <td>${typeof item.unitPrice === 'number' ? item.unitPrice.toFixed(2) : '0.00'}</td>                
+                <td>${item.quantity || 0}</td>
+                <td>${item.picture ? `<img src="${item.picture}" class="img-thumbnail" width="50">` : 'No Image'}</td>
+            </tr>
+        `;
+        $("#table-body").append(row);
+        syncAvailableItems()
+    });
 }
 
 $('#formFileMultiple').on('change', function(e) {
@@ -65,7 +85,7 @@ function previewImage(file) {
 $('#Btn-Submit').on('click', function(e) {
 
     e.preventDefault()
-
+    const id = $('#floatingItemId').val();
     const desc = $('#floatingDesc').val();
     const price = $('#floatingPrice').val();
     const quantity = $('#floatingQty').val();
@@ -83,10 +103,14 @@ $('#Btn-Submit').on('click', function(e) {
     }
 
     if (selectedItemIndex !== null) {
-        item_db[selectedItemIndex] = new ItemModel(desc, price, quantity, imageUrl);
+        item_db[selectedItemIndex] = new ItemModel( id,desc, price, quantity, imageUrl);
+        console.log(id)
         Swal.fire('Updated!', 'Item updated successfully', 'success');
     } else {
-        item_db.push(new ItemModel(desc, price, quantity, imageUrl));
+        const newId = item_db.length + 1;
+        item_db.push(new ItemModel(newId,desc, price, quantity, imageUrl));
+        console.log(newId)
+
         Swal.fire('Added!', 'New item added', 'success');
     }
     resetForm();

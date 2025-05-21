@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Cleva-POS</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -384,87 +385,76 @@
 
     <!---------place order---------------------------------->
 
-    <div class="container" id="order-content">
-        <section>
-            <div id="fullPg">
-                <section id="sidePg">
-                    <h1 class="h2" id="titleorder"><i class="bi bi-cart-plus"></i> Place Order</h1>
+    <div class="container-fluid content-container" id="orders-content">
+        <div class="container-fluid order-page">
+            <nav class="navbar">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-secondary">
+                        Orders
+                    </a>
+                </div>
+            </nav>
 
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search products..." id="productSearch">
-                            <button class="btn btn-primary" type="button">
-                                <i class="bi bi-search"></i>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="item_tbody">
-                        <div class="col">
-                            <div class="card product-card">
-                                <img src="../assets/photos/pic1.jpeg" class="card-img-top product-img" alt="Product">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rs. 1,250.00</p>
-                                    <p class="text-muted">In stock: 15</p>
-                                    <button class="btn btn-primary w-100 add-to-cart">
-                                        <i class="bi bi-cart-plus"></i> Add to Cart
-                                    </button>
+            <div class="d-grid gap-2 col-12 mx-0">
+                <div class="row">
+                    <!-- Item List -->
+                    <div class="col-sm-7 mb-3 mb-sm-0">
+                        <div class="card card-sm">
+                            <div class="card-header">
+                                <form class="d-flex search" role="search">
+                                    <input class="form-control form-control-sm me-2" id="search_order_item_input" type="search" placeholder="Search Items.." aria-label="Search">
+                                    <button class="btn btn-secondary text-dark btn-sm" id="search_order_item_btn" type="submit"><i class="ti ti-search"></i></button>
+                                </form>
+                            </div>
+                            <div class="card-body overflow-auto" id="order-available-item-card" style="max-height: 500px; min-height: 500px;">
+                                <div class="row mt-3" id="order_item_tbody">
+                                    <!-- JS will inject item cards here (according to item list) -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
 
-                <section id="rightSidePg">
-                    <h2 class="h4"><i class="bi bi-cart-check"></i> Current Order</h2>
-
-                    <div class="mb-3">
-                        <label for="search_customer_input" class="form-label">Customer</label>
-                        <input list="customerDatalistOptions" id="search_customer_input" class="form-control" placeholder="Select customer">
-                        <datalist id="customerDatalistOptions">
-                            <option value="John Doe">
-                            <option value="Jane Smith">
-                        </datalist>
-                    </div>
-
-                    <div id="cart" class="p-3 bg-light rounded-3">
-                        <div id="item_cart" class="mb-3">
-                            <div class="card cart-item">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between">
-                                        <h5 class="card-title">Product Name</h5>
-                                        <button class="btn btn-sm btn-outline-danger remove-item">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-                                    </div>
-                                    <p class="card-text">Rs. 1,250.00 x 2 = Rs. 2,500.00</p>
-                                    <div class="quantity-control">
-                                        <button class="btn btn-sm btn-outline-secondary decrease-qty">
-                                            <i class="bi bi-dash"></i>
-                                        </button>
-                                        <span class="quantity-display">2</span>
-                                        <button class="btn btn-sm btn-outline-secondary increase-qty">
-                                            <i class="bi bi-plus"></i>
-                                        </button>
+                    <div class="col-sm-5 mb-3 mb-sm-0">
+                        <div class="card card-sm">
+                            <div class="card-header">
+                                <div class="row align-items-center mb-2">
+                                    <label for="next_order_id" class="col-auto col-form-label" style="font-size: 17px;">Order Id</label>
+                                    <div class="col">
+                                        <input class="form-control form-control-sm" id="next_order_id" type="text" value="" aria-label="readonly input example" readonly>
                                     </div>
                                 </div>
+                                <form class="d-flex search" role="search">
+                                    <select class="form-select form-select-sm" id="customerDropdown">
+                                        <option value="" disabled selected>Select a customer</option>
+                                    </select>
+                                    <!--<button class="btn btn-secondary text-dark btn-sm" id="search_customer_btn" type="submit"><i class="ti ti-search"></i></button>-->
+                                    <!--<datalist id="customerDatalistOptions">
+                                        &lt;!&ndash;<option value="San Francisco">
+                                        <option value="New York">
+                                        <option value="Seattle">
+                                        <option value="Los Angeles">
+                                        <option value="Chicago">&ndash;&gt;
+                                    </datalist>-->
+                                </form>
+                            </div>
+                            <div class="card-body overflow-auto" id="order-items-card" style="max-height: 400px; min-height: 400px;">
+                                <div class="row mt-3" id="item_cart">
+                                    <!-- JS will inject order item cards here (according to item list) -->
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-dark text-light btn-sm w-100" id="finalize-order-place-btn" type="submit">Place Order</button>
                             </div>
                         </div>
-
-                        <div class="total-display d-flex justify-content-between">
-                            <span>Total:</span>
-                            <span>Rs. 2,500.00</span>
-                        </div>
-
-                        <button type="button" class="btn btn-primary mt-3" id="continue">
-                            <i class="bi bi-check-circle"></i> Place Order
-                        </button>
                     </div>
-                </section>
+
+                </div>
             </div>
-        </section>
+
+        </div>
     </div>
+
+
 
     <!--------------------settings------------------------->
 
@@ -956,27 +946,29 @@
     </div>
 
     <script src="assets/lib/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="controller/customerController.js" type="module"></script>
     <script src="controller/itemController.js" type="module"></script>
-    <script src="controller/orderController.js" type="module"></script>
+    <script src="controller/ordersController.js" type="module"></script>
     <script src="controller/invoiceController.js" type="module"></script>
+
 
 <script>
     $(document).ready(function() {
         $('#customer-content').css("display", "none");
         $('#item-content').css("display", "none");
-        $('#order-content').css("display", "none");
+        $('#orders-content').css("display", "none");
         $('#setting-content').css("display", "none");
         $('#invoice-content').css("display", "none");
 
         $('#customer-nav').on('click', function() {
             $('#customer-content').css("display", "block");
             $('#item-content').css("display", "none");
-            $('#order-content').css("display", "none");
+            $('#orders-content').css("display", "none");
             $('#setting-content').css("display", "none");
             $('#invoice-content').css("display", "none");
             $('#dashboard-content').css("display", "none");
@@ -985,7 +977,7 @@
         $('#item-nav').on('click', function() {
             $('#customer-content').css("display", "none");
             $('#item-content').css("display", "block");
-            $('#order-content').css("display", "none");
+            $('#orders-content').css("display", "none");
             $('#setting-content').css("display", "none");
             $('#invoice-content').css("display", "none");
             $('#dashboard-content').css("display", "none");
@@ -994,7 +986,7 @@
         $('#order-nav').on('click', function() {
             $('#customer-content').css("display", "none");
             $('#item-content').css("display", "none");
-            $('#order-content').css("display", "block");
+            $('#orders-content').css("display", "block");
             $('#setting-content').css("display", "none");
             $('#invoice-content').css("display", "none");
             $('#dashboard-content').css("display", "none");
@@ -1003,7 +995,7 @@
         $('#setting-nav').on('click', function() {
             $('#customer-content').css("display", "none");
             $('#item-content').css("display", "none");
-            $('#order-content').css("display", "none");
+            $('#orders-content').css("display", "none");
             $('#setting-content').css("display", "block");
             $('#invoice-content').css("display", "none");
             $('#dashboard-content').css("display", "none");
@@ -1012,7 +1004,7 @@
         $('#invoice-nav').on('click', function() {
             $('#customer-content').css("display", "none");
             $('#item-content').css("display", "none");
-            $('#order-content').css("display", "none");
+            $('#orders-content').css("display", "none");
             $('#setting-content').css("display", "none");
             $('#invoice-content').css("display", "block");
             $('#dashboard-content').css("display", "none");
@@ -1021,7 +1013,7 @@
         $('#dashboard-nav').on('click', function() {
             $('#customer-content').css("display", "none");
             $('#item-content').css("display", "none");
-            $('#order-content').css("display", "none");
+            $('#orders-content').css("display", "none");
             $('#setting-content').css("display", "none");
             $('#invoice-content').css("display", "none");
             $('#dashboard-content').css("display", "block");

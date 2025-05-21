@@ -1,5 +1,6 @@
 import CustomerModel from "../model/customerModel.js";
 import {customer_db} from "../db/db.js";
+import {syncCustomers} from "./ordersController.js";
 
 let selectedCustomerIndex = null;
 
@@ -45,6 +46,7 @@ $('#BtnSubmit').on('click', function() {
         Swal.fire('Added!', 'New customer added', 'success');
     }
     resetForm();
+    syncCustomers()
 });
 
 
