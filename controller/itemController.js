@@ -25,7 +25,6 @@ export function loadItemsOnTable() {
     });
 }
 
-// Image preview functionality
 document.getElementById('formFileMultiple').addEventListener('change', function(e) {
     const preview = document.getElementById('imagePreview');
     preview.innerHTML = '';
@@ -46,7 +45,6 @@ document.getElementById('formFileMultiple').addEventListener('change', function(
 });
 
 
-//load item records
 function loadItems(){
     $('#table-body').empty();
     item_db.forEach((item, index) => {
