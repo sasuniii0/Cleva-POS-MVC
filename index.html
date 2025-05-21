@@ -332,29 +332,41 @@
             <section>
                 <h1 class="h2" id="titleitem"><i class="bi bi-box-seam"></i> Product Management</h1>
 
-                <form id="itemForm">
+                <form id="itemForm" class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingItemId" placeholder=" ">
+                                <input type="text" class="form-control" id="floatingItemId" placeholder=" " required>
                                 <label for="floatingItemId"><i class="bi bi-upc"></i> Product ID</label>
+                                <div class="invalid-feedback">
+                                    Please provide a product ID.
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingDesc" placeholder=" ">
+                                <input type="text" class="form-control" id="floatingDesc" placeholder=" " required minlength="3">
                                 <label for="floatingDesc"><i class="bi bi-card-text"></i> Description</label>
+                                <div class="invalid-feedback">
+                                    Description must be at least 3 characters.
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingPrice" placeholder=" " step="0.01">
+                                <input type="number" class="form-control" id="floatingPrice" placeholder=" " step="0.01" min="0.01" required>
                                 <label for="floatingPrice"><i class="bi bi-currency-dollar"></i> Price</label>
+                                <div class="invalid-feedback">
+                                    Please enter a valid price (minimum 0.01).
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="number" class="form-control" id="floatingQty" placeholder=" ">
+                                <input type="number" class="form-control" id="floatingQty" placeholder=" " min="0" required>
                                 <label for="floatingQty"><i class="bi bi-box"></i> Quantity</label>
+                                <div class="invalid-feedback">
+                                    Please enter a valid quantity (minimum 0).
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -362,6 +374,9 @@
                     <div class="mb-3">
                         <label for="formFileMultiple" class="form-label"><i class="bi bi-image"></i> Product Image</label>
                         <input class="form-control" type="file" id="formFileMultiple" accept="image/*">
+                        <div class="invalid-feedback" id="image-validation-feedback">
+                            Please select a valid image file.
+                        </div>
                         <div id="imagePreview" class="mt-2">
                             <span class="text-muted">Preview</span>
                         </div>

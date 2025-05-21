@@ -44,6 +44,73 @@ document.getElementById('formFileMultiple').addEventListener('change', function(
     }
 });
 
+// Field validation function
+function validateField(field) {
+    if (field[0].checkValidity()) {
+        field.removeClass('is-invalid');
+        field.addClass('is-valid');
+    } else {
+        field.removeClass('is-valid');
+        field.addClass('is-invalid');
+    }
+}
+
+// Image file validation
+function validateImageFile(input) {
+    const file = input[0].files[0];
+    const feedback = $('#image-validation-feedback');
+
+    if (!file) {
+        input.addClass('is-invalid');
+        feedback.text('Please select an image file');
+        return false;
+    }
+
+    if (!file.type.match('image.*')) {
+        input.addClass('is-invalid');
+        feedback.text('Please select a valid image file (JPEG, PNG, etc.)');
+        return false;
+    }
+
+    input.removeClass('is-invalid');
+    return true;
+}
+
+
+(function() {
+    'use strict';
+
+    // Add real-time validation as user types
+    $('.form-control').on('input', function() {
+        validateField($(this));
+    });
+
+    // Custom validation for image file
+    $('#formFileMultiple').on('change', function() {
+        validateImageFile($(this));
+    });
+
+    // Price validation - ensure positive number
+    $('#floatingPrice').on('input', function() {
+        if (parseFloat($(this).val()) <= 0) {
+            this.setCustomValidity('Price must be greater than 0');
+        } else {
+            this.setCustomValidity('');
+        }
+        validateField($(this));
+    });
+
+    // Quantity validation - ensure non-negative
+    $('#floatingQty').on('input', function() {
+        if (parseInt($(this).val()) < 0) {
+            this.setCustomValidity('Quantity cannot be negative');
+        } else {
+            this.setCustomValidity('');
+        }
+        validateField($(this));
+    });
+})();
+
 
 function loadItems(){
     $('#table-body').empty();
@@ -81,6 +148,33 @@ function previewImage(file) {
 
 // Handle save/update
 $('#Btn-Submit').on('click', function(e) {
+
+    const form = $('#itemForm')[0];
+
+    // Validate all fields
+    $('.form-control').each(function() {
+        validateField($(this));
+    });
+
+    // Validate image separately
+    const imageValid = validateImageFile($('#formFileMultiple'));
+
+    if (!form.checkValidity() || !imageValid) {
+        form.classList.add('was-validated');
+
+        // Show error for first invalid field
+        const firstInvalid = $('.is-invalid').first();
+        if (firstInvalid.length) {
+            Swal.fire({
+                title: 'Validation Error',
+                text: firstInvalid.siblings('.invalid-feedback').text() || 'Please fill this field correctly',
+                icon: 'error'
+            });
+            firstInvalid.focus();
+        }
+
+        return;
+    }
 
     e.preventDefault()
     const id = $('#floatingItemId').val();
@@ -147,11 +241,12 @@ $('#Btn-Reset').on('click', function() {
 
 function resetForm() {
     $('#itemForm')[0].reset();
+    $('.form-control').removeClass('is-valid is-invalid');
+    $('#itemForm').removeClass('was-validated');
+    $('#image-validation-feedback').hide();
+    $('#imagePreview').html('<span class="text-muted">Preview</span>');
     selectedItemIndex = null;
-    currentImageFile = null;
     $('#Btn-Submit').text('Save');
-    $('#floatingItemId').prop('disabled', false);
-    $('#imagePreview').empty();
     loadItems();
 }
 
