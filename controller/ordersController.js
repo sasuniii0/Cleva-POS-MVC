@@ -11,6 +11,17 @@ $(document).ready(function (){
     generateNextOrderId();
 })
 
+// Set current date in the date input
+document.addEventListener('DOMContentLoaded', function () {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${yyyy}-${mm}-${dd}`;
+    document.getElementById('currentDateInput').value = formattedDate;
+});
+
+
 export function syncAvailableItems(){
     available_items =item_db.filter(item => item.quantity >0).map(item =>({
         description: item.description,
