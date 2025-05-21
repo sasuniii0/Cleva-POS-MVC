@@ -28,22 +28,24 @@ function renderItems(filter = "") {
         (item.description && item.description.toLowerCase().includes(filter.toLowerCase()))
     ).forEach((item, index) => {
         const card = `
-            <div class="col-6 col-md-6 mb-3">
-                <div class="card h-100 bg-light text-dark shadow-sm">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div class="text-start">
-                            <h6 class="card-title mb-1">${item.description}</h6>
-                            <p class="card-text mb-2">Rs. ${item.unitPrice.toFixed(2)}</p>
-                        </div>
-                        <div class="text-end mt-auto">
-                            <button class="btn btn-transparent border-0 btn-sm add_to_cart_btn" data-index="${index}">
-                                <i class="bi bi-cart4 fs-4"></i>
-                            </button>
-                        </div>
-                    </div>
+    <div class="col-6 col-md-4 mb-3">
+        <div class="card h-100 border-0 shadow-sm hover-shadow transition-all">
+            <div class="card-body d-flex flex-column">
+                <div class="text-start mb-2">
+                    <h6 class="card-title mb-1 fw-semibold">${item.description}</h6>
+                    <p class="card-text mb-2 text-success fw-bold">Rs. ${item.unitPrice.toFixed(2)}</p>
+                    <small class="text-muted">Available: ${item.quantity}</small>
+                </div>
+                
+                <div class="mt-auto">
+                    <button class="btn btn-primary btn-sm w-100 add_to_cart_btn" data-index="${index}">
+                        <i class="bi bi-cart-plus me-1"></i> Add to Cart
+                    </button>
                 </div>
             </div>
-        `;
+        </div>
+    </div>
+`;
         container.append(card);
     });
 }
@@ -90,9 +92,8 @@ $(document).on("click", ".add_to_cart_btn", function () {
                                 <div class="text-start">
                                     <h6 class="card-title mb-1">${item.description} x <span class="item-cart-count-display">${count}</span></h6>
                                     <p class="card-text mb-2 item-total">Rs. ${item.unitPrice.toFixed(2)} x <span class="item-cart-count-display">${count}</span> = <span class="item-total-amount">${itemTotalAmount.toFixed(2)}</span></p>
-                                    <button class="btn btn-outline-dark rounded-circle btn-dark text-white btn-sm me-1 increaseCount" style="width: 20px; height: 20px; padding: 0;"><i class="ti ti-plus"></i></button><span class="item-cart-count">${count}</span>
-                                    <button class="btn btn-outline-dark rounded-circle btn-dark text-white btn-sm me-1 decreaseCount" style="width: 20px; height: 20px; padding: 0;"><i class="ti ti-minus"></i></button>
-                                </div>
+                                    <button class="btn btn-dark rounded-circle btn-sm me-1 increaseCount" style="width: 24px; height: 24px; padding: 0; line-height: 1;"><i class="bi bi-plus"></i></button><span class="item-cart-count">${count}</span>
+                                    <button class="btn btn-dark rounded-circle btn-sm me-1 decreaseCount" style="width: 24px; height: 24px; padding: 0; line-height: 1;"><i class="bi bi-dash"></i></button> </div>
                                 <div class="text-end mt-auto">
                                     <button class="btn btn-transparent text-danger border-0 btn-sm remove_from_cart_btn"><i class="bi bi-trash3-fill fs-5"></i></i></button>
                                 </div>
@@ -117,7 +118,15 @@ $(document).on('click', ".increaseCount", function () {
 
     // Check quantity limit
     if (count > itemData.quantity) {
-        alert(`Only ${itemData.quantity} ${item}(s) available.`);
+        Swal.fire({
+            title: 'Stock Limit Reached',
+            html: `<div class="text-center">
+              <i class="bi bi-exclamation-triangle-fill text-warning fs-1 mb-3"></i>
+              <p class="mb-0">Only <strong>${itemData.quantity}</strong> ${item}(s) available in stock.</p>
+              <p class="text-muted small mt-1">Cannot add more than available quantity.</p>
+           </div>`,
+            confirmButtonText: 'OK',
+        });
         return;
     }
 

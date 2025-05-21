@@ -239,6 +239,13 @@ body {
 
 /*orders styles*/
 
+#orders-sec{
+    gap: 2rem;
+    margin-top: 1rem;
+    background-color: white;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+    padding: 1.5rem;
+}
 #fullPg {
     display: flex;
     gap: 2rem;
@@ -260,6 +267,8 @@ body {
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
     padding: 1.5rem;
 }
+
+
 
 #item_tbody{
     justify-items: center;

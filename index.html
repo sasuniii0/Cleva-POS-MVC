@@ -384,77 +384,77 @@
 
 
     <!---------place order---------------------------------->
-
     <div class="container-fluid content-container" id="orders-content">
-        <div class="container-fluid order-page">
-            <nav class="navbar">
-                <div class="container-fluid">
-                    <a class="navbar-brand text-secondary">
-                        Orders
-                    </a>
-                </div>
-            </nav>
+        <div class="container" id="orders-sec">
+            <section>
+                <h1 class="h2" id="titleorder"><i class="bi bi-cart-check"></i> Order Management</h1>
 
-            <div class="d-grid gap-2 col-12 mx-0">
                 <div class="row">
-                    <!-- Item List -->
-                    <div class="col-sm-7 mb-3 mb-sm-0">
-                        <div class="card card-sm">
-                            <div class="card-header">
-                                <form class="d-flex search" role="search">
-                                    <input class="form-control form-control-sm me-2" id="search_order_item_input" type="search" placeholder="Search Items.." aria-label="Search">
-                                    <button class="btn btn-secondary text-dark btn-sm" id="search_order_item_btn" type="submit"><i class="ti ti-search"></i></button>
-                                </form>
+                    <!-- Item List Section -->
+                    <div class="col-md-7 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header  text-black">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0"><i class="bi bi-box-seam"></i> Available Products</h5>
+                                    <form class="d-flex" role="search">
+                                        <div class="input-group input-group-sm">
+                                            <input class="form-control" id="search_order_item_input" type="search" placeholder="Search items...">
+                                            <button class="btn btn-light" id="search_order_item_btn" type="submit">
+                                                <i class="bi bi-search"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="card-body overflow-auto" id="order-available-item-card" style="max-height: 500px; min-height: 500px;">
-                                <div class="row mt-3" id="order_item_tbody">
-                                    <!-- JS will inject item cards here (according to item list) -->
+                            <div class="card-body overflow-auto" id="order-available-item-card" style="max-height: 500px;">
+                                <div class="row g-3" id="order_item_tbody">
+                                    <!-- JS will inject item cards here -->
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-5 mb-3 mb-sm-0">
-                        <div class="card card-sm">
-                            <div class="card-header">
-                                <div class="row align-items-center mb-2">
-                                    <label for="next_order_id" class="col-auto col-form-label" style="font-size: 17px;">Order Id</label>
-                                    <div class="col">
-                                        <input class="form-control form-control-sm" id="next_order_id" type="text" value="" aria-label="readonly input example" readonly>
+                    <!-- Order Section -->
+                    <div class="col-md-5 mb-4">
+                        <div class="card shadow-sm">
+                            <div class="card-header  text-black">
+                                <h5 class="mb-0"><i class="bi bi-cart"></i> Current Order</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="next_order_id" placeholder=" " readonly>
+                                        <label for="next_order_id"><i class="bi bi-tag"></i> Order ID</label>
                                     </div>
                                 </div>
-                                <form class="d-flex search" role="search">
-                                    <select class="form-select form-select-sm" id="customerDropdown">
-                                        <option value="" disabled selected>Select a customer</option>
-                                    </select>
-                                    <!--<button class="btn btn-secondary text-dark btn-sm" id="search_customer_btn" type="submit"><i class="ti ti-search"></i></button>-->
-                                    <!--<datalist id="customerDatalistOptions">
-                                        &lt;!&ndash;<option value="San Francisco">
-                                        <option value="New York">
-                                        <option value="Seattle">
-                                        <option value="Los Angeles">
-                                        <option value="Chicago">&ndash;&gt;
-                                    </datalist>-->
-                                </form>
-                            </div>
-                            <div class="card-body overflow-auto" id="order-items-card" style="max-height: 400px; min-height: 400px;">
-                                <div class="row mt-3" id="item_cart">
-                                    <!-- JS will inject order item cards here (according to item list) -->
+
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="customerDropdown">
+                                            <option value="" disabled selected>Select a customer</option>
+                                        </select>
+                                        <label for="customerDropdown"><i class="bi bi-person"></i> Customer</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <button class="btn btn-dark text-light btn-sm w-100" id="finalize-order-place-btn" type="submit">Place Order</button>
+
+                                <div class="border rounded p-2 mb-3" style="max-height: 400px; overflow-y: auto;" id="order-items-card">
+                                    <div class="row g-2" id="item_cart">
+                                        <!-- JS will inject order items here -->
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button class="btn btn-success" id="finalize-order-place-btn">
+                                        <i class="bi bi-check-circle"></i> Place Order
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
-            </div>
-
+            </section>
         </div>
     </div>
-
-
 
     <!--------------------settings------------------------->
 
