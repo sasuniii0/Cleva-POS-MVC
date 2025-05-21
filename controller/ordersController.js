@@ -238,8 +238,15 @@ $(document).on("click", "#finalize-order-place-btn", function (e) {
 
     Swal.fire({
         icon: 'success',
-        title: 'Order placed!',
-        text: 'Your order has been successfully submitted.',
+        title: 'Order placed successfully!',
+        html: `
+        <div style="text-align: left;">
+            <p><strong>Order ID:</strong> ${orderId}</p>
+            <p><strong>Customer:</strong> ${customerName}</p>
+            <p><strong>Total Amount:</strong> Rs. ${totalAmount.toFixed(2)}</p>
+            <p>Your order has been successfully submitted.</p>
+        </div>
+    `,
         confirmButtonText: 'OK'
     }).then(() => {
         const order = {
