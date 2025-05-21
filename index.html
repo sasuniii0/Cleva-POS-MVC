@@ -227,39 +227,61 @@
                     </div>
                 </div>
 
-                <form id="customerForm">
+                <form id="customerForm" class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingId" name="id" placeholder=" " autocomplete="username">
+                                <input type="text" class="form-control" id="floatingId" name="id" placeholder=" " autocomplete="username" required>
                                 <label for="floatingId"><i class="bi bi-person-badge"></i> Customer ID</label>
+                                <div class="invalid-feedback">
+                                    Please provide a customer ID.
+                                </div>
                             </div>
 
+                            <!-- Full Name -->
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingName" name="name" placeholder=" " autocomplete="name">
+                                <input type="text" class="form-control" id="floatingName" name="name" placeholder=" " autocomplete="name" required minlength="3">
                                 <label for="floatingName"><i class="bi bi-person"></i> Full Name</label>
+                                <div class="invalid-feedback">
+                                    Please provide a valid name (at least 3 characters).
+                                </div>
                             </div>
 
+                            <!-- Email Address -->
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingEmail" name="email" placeholder=" " autocomplete="email">
+                                <input type="email" class="form-control" id="floatingEmail" name="email" placeholder=" " autocomplete="email" required>
                                 <label for="floatingEmail"><i class="bi bi-envelope"></i> Email Address</label>
+                                <div class="invalid-feedback">
+                                    Please provide a valid email address.
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" id="floatingAddress" name="address" placeholder=" " style="height: 100px" autocomplete="street-address"></textarea>
+                                <textarea class="form-control" id="floatingAddress" name="address" placeholder=" " style="height: 100px" autocomplete="street-address" required minlength="10"></textarea>
                                 <label for="floatingAddress"><i class="bi bi-house-door"></i> Address</label>
+                                <div class="invalid-feedback">
+                                    Please provide a complete address (at least 10 characters).
+                                </div>
                             </div>
 
+                            <!-- NIC/Identification -->
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingNic" name="nic" placeholder=" " autocomplete="nic">
+                                <input type="text" class="form-control" id="floatingNic" name="nic" placeholder=" " autocomplete="nic" required pattern=".{10,}">
                                 <label for="floatingNic"><i class="bi bi-credit-card"></i> NIC/Identification</label>
+                                <div class="invalid-feedback">
+                                    Please provide a valid NIC/ID (at least 10 characters).
+                                </div>
                             </div>
 
+                            <!-- Contact Number -->
                             <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" id="floatingContact" name="contact" placeholder=" " autocomplete="tel">
+                                <input type="tel" class="form-control" id="floatingContact" name="contact" placeholder=" " autocomplete="tel" required pattern="[0-9]{10}">
                                 <label for="floatingContact"><i class="bi bi-telephone"></i> Contact Number</label>
+                                <div class="invalid-feedback">
+                                    Please provide a valid 10-digit phone number.
+                                </div>
                             </div>
                         </div>
                     </div>

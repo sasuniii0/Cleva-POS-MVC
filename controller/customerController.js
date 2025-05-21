@@ -25,8 +25,65 @@ function loadCustomers(){
         $('#tableBody').append(data);
     })
 }
+
+
+(function() {
+    'use strict';
+
+    function validateField(field) {
+        if (field[0].checkValidity()) {
+            field.removeClass('is-invalid');
+            field.addClass('is-valid');
+        } else {
+            field.removeClass('is-valid');
+            field.addClass('is-invalid');
+        }
+    }
+
+    const form = $('#customerForm');
+    form.addClass('needs-validation');
+
+    $('.form-control').on('input', function() {
+        validateField($(this));
+    });
+
+    $('#floatingContact').on('input', function() {
+        const phoneRegex = /^0\d{9}$/;
+        if (phoneRegex.test($(this).val())) {
+            this.setCustomValidity('');
+        }
+    });
+
+    $('#floatingNic').on('input', function() {
+        if ($(this).val().length < 10) {
+            this.setCustomValidity('NIC must be at least 10 characters');
+        } else {
+            this.setCustomValidity('');
+        }
+    });
+})();
+
 // Handle save/update
 $('#BtnSubmit').on('click', function() {
+
+    const form = $('#customerForm')[0];
+
+    if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+
+        const firstInvalid = $('.is-invalid').first();
+        if (firstInvalid.length) {
+            Swal.fire({
+                title: 'Validation Error',
+                text: firstInvalid.siblings('.invalid-feedback').text() || 'Please fill this field correctly',
+                icon: 'error'
+            });
+            firstInvalid.focus();
+        }
+
+        return;
+    }
+
     const name = $('#floatingName').val();
     const contact = $('#floatingContact').val();
     const email = $('#floatingEmail').val();
@@ -48,7 +105,6 @@ $('#BtnSubmit').on('click', function() {
     resetForm();
     syncCustomers()
 });
-
 
 // Delete customer
 $('#BtnDelete').on('click', function() {
@@ -84,6 +140,8 @@ $('#BtnReset').on('click', function() {
 
 function resetForm() {
     $('#customerForm')[0].reset();
+    $('.form-control').removeClass('is-valid is-invalid');
+    $('#customerForm').removeClass('was-validated');
     selectedCustomerIndex = null;
     $('#BtnSubmit').text('Save');
     loadCustomers();
@@ -96,6 +154,8 @@ $(document).ready(function() {
 //click on table row
 $('#tableBody').on('click', 'tr', function() {
     const cells = $(this).find('td');
+
+    $('.form-control').removeClass('is-valid is-invalid');
 
     const id = cells.eq(0).text();
     const name = cells.eq(1).text();
@@ -121,4 +181,3 @@ $('#tableBody').on('click', 'tr', function() {
     $(this).addClass('table-primary');
 
 })
-
